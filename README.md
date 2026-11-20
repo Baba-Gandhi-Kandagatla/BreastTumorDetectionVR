@@ -1,10 +1,20 @@
 # Breast ultrasound classification and segmentation
 
-This research project pairs image classification with mass segmentation in breast ultrasound. The classification pipeline assigns a benign, malignant or normal label. The segmentation pipeline produces a pixel mask that can be compared with the original ultrasound.
+## Introduction
 
-![Example ultrasound image, corresponding binary mass mask and overlay.](docs/images/segmentation-example.png)
+A research prototype for classifying breast ultrasound images and localizing masses with segmentation masks.
 
-## Explore the experiments
+## Tech stack
+
+Python with PyTorch, TensorFlow/Keras and OpenCV for model experiments and inference. Flask exposes prediction services. A React client and an Express account service provide the web interface. The broader project used Unreal Engine for visualization.
+
+## Features
+
+- Predict benign, malignant or normal classes for ultrasound images or video frames.
+- Segment a mass and inspect the mask alongside the ultrasound.
+- Review per-image F1, Jaccard, recall and precision in the evaluation table.
+
+## The process
 
 | Task | Models and evidence |
 | --- | --- |
@@ -15,12 +25,26 @@ This research project pairs image classification with mass segmentation in breas
 
 Some filenames, routes and older screenshots use “LLM” for the transformer path. The classifier behind that label is a vision transformer operating on ultrasound imagery.
 
-## Reproduction
+## How it can be improved
 
-Start with the notebooks, example videos and score table. The inference services require trained checkpoints, including the ViT weights, EfficientNet weights and a Keras segmentation model referenced in `MERN/app.py`. Those files need to be supplied separately. The repository also includes a React client under `MERN/client/`, an Express account service under `MERN/server/`, and a separate Flask segmentation service in `MERN/dlapp.py`.
+A versioned manifest of dataset splits, preprocessing settings and checkpoint identifiers would help readers connect a notebook run to its prediction outputs and score table.
+
+## How to run
+
+To explore the saved results, open the [per-image score table](unet/score.csv) or [U-Net experiment](unet/unet-final.ipynb). To start the web client from the repository root:
+
+```sh
+cd MERN/client
+npm ci
+npm run dev
+```
+
+The inference services require trained checkpoints, including the ViT weights, EfficientNet weights and a Keras segmentation model referenced in `MERN/app.py`. Those files need to be supplied separately. The repository also includes a React client under `MERN/client/`, an Express account service under `MERN/server/`, and a separate Flask segmentation service in `MERN/dlapp.py`.
 
 The evaluation table reports experimental results on the project data. It does not establish clinical performance.
 
-## Making the experiments reproducible
+## Screenshots
 
-A versioned manifest of dataset splits, preprocessing settings and checkpoint identifiers would help readers connect a notebook run to its prediction outputs and score table.
+![Example ultrasound image, corresponding binary mass mask and overlay.](docs/images/segmentation-example.png)
+
+From left to right: source ultrasound, binary mask and overlay.
