@@ -2,6 +2,8 @@
 
 This research project pairs image classification with mass segmentation in breast ultrasound. The classification pipeline assigns a benign, malignant or normal label. The segmentation pipeline produces a pixel mask that can be compared with the original ultrasound.
 
+![Example ultrasound image, corresponding binary mass mask and overlay.](docs/images/segmentation-example.png)
+
 ## Explore the experiments
 
 | Task | Models and evidence |
@@ -18,3 +20,7 @@ Some filenames, routes and older screenshots use “LLM” for the transformer p
 Start with the notebooks, example videos and score table. The inference services require trained checkpoints, including the ViT weights, EfficientNet weights and a Keras segmentation model referenced in `MERN/app.py`. Those files need to be supplied separately. The repository also includes a React client under `MERN/client/`, an Express account service under `MERN/server/`, and a separate Flask segmentation service in `MERN/dlapp.py`.
 
 The evaluation table reports experimental results on the project data. It does not establish clinical performance.
+
+## Making the experiments reproducible
+
+A versioned manifest of dataset splits, preprocessing settings and checkpoint identifiers would help readers connect a notebook run to its prediction outputs and score table.
